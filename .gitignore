@@ -8,4 +8,4 @@
 
 /scripts/
 
-
+/terraform/modules/security/resources/api_key/api_keys.json

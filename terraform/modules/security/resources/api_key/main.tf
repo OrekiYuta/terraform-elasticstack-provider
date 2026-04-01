@@ -20,12 +20,12 @@ locals {
     for k in local.api_keys :
     k.name => k
   }
-
-  # 准备写入文件的 JSON 内容
+  # output the apikey
   api_keys_json = jsonencode({
     for k, r in elasticstack_elasticsearch_security_api_key.this :
-    k => r.api_key
+    k => r
   })
+
 }
 
 resource "elasticstack_elasticsearch_security_api_key" "this" {
@@ -41,7 +41,7 @@ resource "elasticstack_elasticsearch_security_api_key" "this" {
 
 
 resource "local_file" "api_keys_file" {
-  filename = "${path.root}/api_keys.json"
+  filename = "${path.root}/../terraform/modules/security/resources/api_key/api_keys.json"
   content  = local.api_keys_json
 }
 
