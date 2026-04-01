@@ -1,0 +1,51 @@
+api_keys:
+  - name: tf_api_key_1
+    expiration: 7d
+
+    role_descriptors:
+      reader-role:
+        cluster:
+          - monitor
+
+        indices:
+          - names:
+              - "tf_index*"
+            privileges:
+              - read
+              - view_index_metadata
+
+    metadata:
+      env: dev
+      team: platform
+
+  - name: tf_api_key_2
+    expiration: 30d
+
+    role_descriptors:
+      writer-role:
+        cluster:
+          - monitor
+
+        indices:
+          - names:
+              - "tf_index1"
+            privileges:
+              - write
+              - create_index
+
+    metadata:
+      env: prod
+      owner: data-team
+
+  - name: tf_cross_cluster_key_3
+    type: cross_cluster
+    expiration: 30d
+
+    access:
+      replication:
+        - names:
+            - "archive-*"
+
+    metadata:
+      env: prod
+      usage: cross-cluster

@@ -1,0 +1,31 @@
+#index_templates: []
+index_templates:
+  - name: tf_my_template
+    priority: 42
+    index_patterns:
+      - "tf_*"
+    template:
+      settings:
+        number_of_shards: 3
+      mappings:
+        properties:
+          field1:
+            type: keyword
+      aliases:
+        - name: my_template_test
+        - name: another_test
+
+  - name: tf_my_data_stream
+    data_stream: true
+    index_patterns:
+      - "tf1_*"
+    template:
+      settings:
+        number_of_shards: 3
+      mappings:
+        properties:
+          field1:
+            type: keyword
+      aliases:
+        - name: my_template_test
+        - name: another_test

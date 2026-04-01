@@ -1,0 +1,14 @@
+#indices: []
+indices:
+  - name: tf_index1
+    number_of_shards: 3
+    number_of_replicas: 0
+
+    aliases:
+      - name: tf_alias1
+      - name: tf_alias2
+
+    mappings:
+      properties:
+        field1:
+          type: keyword
