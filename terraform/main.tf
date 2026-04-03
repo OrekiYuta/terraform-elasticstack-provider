@@ -25,6 +25,6 @@ module "non_empty_index_no_delete" {
   source = "./modules/special_scenarios_tests/non_empty_index_no_delete"
 }
 ## case2: call external http endpoint and use the response
-module "get_http_resp"{
-  source = "./modules/special_scenarios_tests/get_http_resp"
+module "call_external_http"{
+  source = "./modules/special_scenarios_tests/call_external_http"
 }

@@ -24,7 +24,7 @@ terraform apply -target "module.api_key" -auto-approve
 terraform destroy -target "module.api_key" -auto-approve
 
 
-terraform plan -target "module.get_http_resp"
+terraform plan -target "module.call_external_http"
 
 ```
 
