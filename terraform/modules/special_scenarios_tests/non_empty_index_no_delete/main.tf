@@ -21,17 +21,16 @@ variable "es_password" {
 }
 
 locals {
-
   config = yamldecode(file("${path.root}/../gitops/special_scenarios_tests/non_empty_index_no_delete/index.yaml"))
-  new_index_names = [for i in lookup(local.config, "indices", []) : i.name]
+  yaml_existing_indices = [for i in lookup(local.config, "indices", []) : i.name]
 }
 
 
-data "external" "check_deleted_indices" {
-  program = ["python", "${path.module}/check_deleted_indices.py"]
+data "external" "custom_validation" {
+  program = ["python", "${path.module}/custom_validation.py"]
 
   query = {
-    new_indices = jsonencode(local.new_index_names)
+    yaml_existing_indices = jsonencode(local.yaml_existing_indices)
     prefix      = "nte--app1--d0--"
     es_url      = var.es_url
     es_user     = var.es_user
@@ -41,15 +40,8 @@ data "external" "check_deleted_indices" {
 
 
 resource "elasticstack_elasticsearch_index" "this" {
-  for_each = { for idx in local.new_index_names : idx => idx }
-
+  for_each = { for idx in local.yaml_existing_indices : idx => idx }
   name               = each.value
-  number_of_shards   = 1
-  number_of_replicas = 0
 
-  lifecycle {
-    prevent_destroy = false
-  }
-
-  depends_on = [data.external.check_deleted_indices]
+  depends_on = [data.external.custom_validation]
 }

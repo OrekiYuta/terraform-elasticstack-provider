@@ -41,8 +41,9 @@ def delete_all_documents(index_name: str):
 
 
 if __name__ == "__main__":
-    index_name = "nte--app1--d0--tf_index1_with_document"
+    # index_name = "nte--app1--d0--tf_index1_with_document"
+    # index_name = "nte--app1--d0--tf_index3_with_document"
+    index_name = "nte--app1--d0--tf_index4_with_document"
 
-    # insert_document(index_name)
-
-    delete_all_documents(index_name)
+    insert_document(index_name)
+    # delete_all_documents(index_name)
