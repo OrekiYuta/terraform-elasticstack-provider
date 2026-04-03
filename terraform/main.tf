@@ -32,3 +32,7 @@ module "call_external_http"{
 module "call_local_command"{
   source = "./modules/special_scenarios_tests/call_local_command"
 }
+
+module "call_local_python"{
+  source = "./modules/special_scenarios_tests/call_local_python"
+}

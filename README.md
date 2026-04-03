@@ -26,6 +26,7 @@ terraform destroy -target "module.api_key" -auto-approve
 
 terraform plan -target "module.call_external_http"
 terraform plan -target "module.call_local_command"
+terraform plan -target "module.call_local_python"
 ```
 
 

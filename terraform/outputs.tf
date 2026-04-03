@@ -9,3 +9,7 @@ output "call_external_http" {
 output "call_local_command" {
   value = module.call_local_command
 }
+
+output "call_local_python" {
+  value = module.call_local_python
+}
