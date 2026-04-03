@@ -20,7 +20,11 @@ module "index_data" {
 
 
 # special scenarios for resources
-# case1: prevent deletion of non-empty indices
+## case1: prevent deletion of non-empty indices
 module "non_empty_index_no_delete" {
   source = "./modules/special_scenarios_tests/non_empty_index_no_delete"
+}
+## case2: call external http endpoint and use the response
+module "get_http_resp"{
+  source = "./modules/special_scenarios_tests/get_http_resp"
 }

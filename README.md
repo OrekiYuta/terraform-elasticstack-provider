@@ -23,25 +23,33 @@ terraform plan -target "module.api_key"
 terraform apply -target "module.api_key" -auto-approve
 terraform destroy -target "module.api_key" -auto-approve
 
+
+terraform plan -target "module.get_http_resp"
+
 ```
 
 
 ```tree
-terraform-elasticstack-provider
-    - gitops/
-        index/
-          resources/
-            - index.yaml
-            - index_template.yaml
-    - terraform/
-        - modules/
-           index/
-              resources/
-                index/
-                  main.tf
-        - main.tf
-        - providers.tf
-        - terraform.tfvars
-        - variables.tf
-
+terraform-elasticstack-provider/
+├── gitops/
+│   └── index/
+│       └── resources/
+│           ├── index.yaml
+│           └── index_template.yaml
+│
+├── terraform/
+│   ├── .terraform/                
+│   ├── modules/
+│   │   └── index/
+│   │       └── resources/
+│   │           ├── index/
+│   │           │   └── main.tf    
+│   │           └── index_template/
+│   │               └── main.tf    
+│   │
+│   ├── main.tf                   # Root module entry point
+│   ├── providers.tf              # Provider configuration
+│   ├── variables.tf              # Input variable definitions
+│   ├── terraform.tfvars          # Variable values
+│   └── outputs.tf                # Output definitions
 ```
