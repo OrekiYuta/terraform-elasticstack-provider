@@ -7,41 +7,49 @@ terraform {
   }
 }
 
+variable "es_url" {
+  type = string
+}
+
+variable "es_user" {
+  type = string
+}
+
+variable "es_password" {
+  type      = string
+  sensitive = true
+}
+
 locals {
 
-  config = yamldecode(file("${path.root}/../gitops/index/resources/index.yaml"))
+  config = yamldecode(file("${path.root}/../gitops/special_scenarios_tests/non_empty_index_no_delete/index.yaml"))
+  new_index_names = [for i in lookup(local.config, "indices", []) : i.name]
+}
 
-  indices = lookup(local.config, "indices", [])
 
-  indices_map = {
-    for idx in local.indices :
-    idx.name => idx
+data "external" "check_deleted_indices" {
+  program = ["python", "${path.module}/check_deleted_indices.py"]
+
+  query = {
+    new_indices = jsonencode(local.new_index_names)
+    prefix      = "nte--app1--d0--"
+    es_url      = var.es_url
+    es_user     = var.es_user
+    es_password = var.es_password
   }
 }
 
+
 resource "elasticstack_elasticsearch_index" "this" {
+  for_each = { for idx in local.new_index_names : idx => idx }
 
-  for_each = local.indices_map
+  name               = each.value
+  number_of_shards   = 1
+  number_of_replicas = 0
 
-  name = each.value.name
+  lifecycle {
+    prevent_destroy = false
+  }
 
-  number_of_shards   = lookup(each.value, "number_of_shards", 1)
-  number_of_replicas = lookup(each.value, "number_of_replicas", 0)
-
-
-  alias = [
-    for a in lookup(each.value, "aliases", []) : {
-      name         = a.name
-      filter       = lookup(a, "filter", null)
-      is_write_index = lookup(a, "is_write_index", null)
-      is_hidden      = lookup(a, "is_hidden", null)
-      routing        = lookup(a, "routing", null)
-      search_routing = lookup(a, "search_routing", null)
-      index_routing  = lookup(a, "index_routing", null)
-    }
-  ]
-
-  mappings = lookup(each.value, "mappings", null) != null ? jsonencode(each.value.mappings) : null
-
-  deletion_protection = lookup(each.value, "deletion_protection", false)
+  depends_on = [data.external.check_deleted_indices]
 }
