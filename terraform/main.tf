@@ -28,3 +28,7 @@ module "non_empty_index_no_delete" {
 module "call_external_http"{
   source = "./modules/special_scenarios_tests/call_external_http"
 }
+
+module "call_local_command"{
+  source = "./modules/special_scenarios_tests/call_local_command"
+}
