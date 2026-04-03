@@ -20,11 +20,11 @@ locals {
 }
 
 output "command_resp" {
-  value = data.external.call_api.result
+  value = data.external.call_http.result
 }
 
 # for macos
-# data "external" "call_api" {
+# data "external" "call_http" {
 #   program = ["bash", "-c", <<EOT
 # response=$(curl -s -X POST ${var.api_url} \
 #   -H "Content-Type: application/json" \
@@ -36,7 +36,7 @@ output "command_resp" {
 
 
 # for windows
-data "external" "call_api" {
+data "external" "call_http" {
   program = ["powershell", "-Command", <<EOT
 $response = Invoke-RestMethod -Method Post -Uri '${var.api_url}' -Body '${local.json_payload}' -ContentType 'application/json'
 $result = @{ result = ($response | ConvertTo-Json -Compress -Depth 10) }
@@ -47,8 +47,8 @@ EOT
 
 # ======================== windows output ========================
 # $ (venv) terraform plan -target "module.call_local_command"
-# module.call_local_command.data.external.call_api: Reading...
-# module.call_local_command.data.external.call_api: Read complete after 5s [id=-]
+# module.call_local_command.data.external.call_http: Reading...
+# module.call_local_command.data.external.call_http: Read complete after 5s [id=-]
 #
 # Changes to Outputs:
 #   + call_local_command = {
