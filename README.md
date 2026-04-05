@@ -1,14 +1,7 @@
 
 ```shell
-
 cd terraform
 terraform init
-terraform plan -target=module.index
-terraform apply -target=module.index
-
-```
-
-```windows powershell
 
 terraform plan "-target=module.index"
 terraform apply "-target=module.index"
@@ -37,25 +30,63 @@ terraform apply -target "module.non_empty_index_no_delete" -auto-approve
 
 ```tree
 terraform-elasticstack-provider/
+├── .env
+├── .git/
+├── .gitignore
+├── .idea/
+├── README.md
+├── requirements.txt
+├── venv/
+├── scripts/
+│   ├── index_docs_manager.py
+│   └── __pycache__/
 ├── gitops/
-│   └── index/
-│       └── resources/
-│           ├── index.yaml
-│           └── index_template.yaml
-│
-├── terraform/
-│   ├── .terraform/                
-│   ├── modules/
-│   │   └── index/
-│   │       └── resources/
-│   │           ├── index/
-│   │           │   └── main.tf    
-│   │           └── index_template/
-│   │               └── main.tf    
-│   │
-│   ├── main.tf                   # Root module entry point
-│   ├── providers.tf              # Provider configuration
-│   ├── variables.tf              # Input variable definitions
-│   ├── terraform.tfvars          # Variable values
-│   └── outputs.tf                # Output definitions
+│   ├── index/
+│   │   ├── data_sources/
+│   │   └── resources/
+│   │       ├── index.yaml
+│   │       └── index_template.yaml
+│   ├── security/
+│   │   └── resources/
+│   │       └── api_key.yaml
+│   └── special_scenarios_tests/
+│       └── non_empty_index_no_delete/
+│           └── index.yaml
+└── terraform/
+    ├── .terraform/
+    ├── .terraform.lock.hcl
+    ├── main.tf
+    ├── outputs.tf
+    ├── providers.tf
+    ├── terraform.tfstate
+    ├── terraform.tfvars
+    ├── variables.tf
+    └── modules/
+        ├── index/
+        │   ├── data_sources/
+        │   │   ├── index/
+        │   │   │   └── main.tf
+        │   │   └── index_template/
+        │   └── resources/
+        │       ├── index/
+        │       │   └── main.tf
+        │       └── index_template/
+        │           └── main.tf
+        ├── security/
+        │   ├── data_sources/
+        │   └── resources/
+        │       └── api_key/
+        │           ├── api_keys.json
+        │           └── main.tf
+        └── special_scenarios_tests/
+            ├── call_external_http/
+            │   └── main.tf
+            ├── call_local_command/
+            │   └── main.tf
+            ├── call_local_python/
+            │   ├── call_http.py
+            │   └── main.tf
+            └── non_empty_index_no_delete/
+                ├── custom_validation.py
+                └── main.tf
 ```
