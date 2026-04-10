@@ -24,15 +24,36 @@ data "elasticstack_elasticsearch_indices" "this" {
 }
 
 
-output "application_indices_details" {
+output "index_info" {
   value = flatten([
     for ds in data.elasticstack_elasticsearch_indices.this :
     [for idx in ds.indices : idx.name]
   ])
 }
 
+
 # Changes to Outputs:
-#   + application_indices_details = [
+#   + data_sources_index_info = [
+#       + "application-metrics-kafka-new",
+#       + "application-metrics-openshift",
+#       + "application-metrics-gitlab-security",
+#       + "application-metrics-seeker",
+#       + "application-metrics-servicenow",
+#       + "application-metrics-gitlab",
+#       + "application-metrics-jenkins",
+#       + "application-metrics-jenkins-resource-optimization-openshift",
+#       + "application-metrics-jenkins-security",
+#       + "application-metrics-kafka",
+#       + "application-metrics-openshift-security",
+#       + "application-metrics-snyk",
+#       + "application-metrics-jenkins-resource-optimization",
+#       + "application-metrics-kong",
+#       + "application-metrics-resource-optimization-database",
+#     ]
+
+
+# Changes to Outputs:
+#   + index_info = [
 #       + {
 #           + alias                                  = []
 #           + analysis_analyzer                      = null
