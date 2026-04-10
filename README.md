@@ -3,27 +3,26 @@
 cd terraform
 terraform init
 
-terraform plan "-target=module.index"
-terraform apply "-target=module.index"
+terraform plan "-target=module.resources_index"
+terraform apply "-target=module.resources_index"
 
-terraform plan -target "module.index"
-terraform apply -target="module.index" -auto-approve
+terraform plan -target "module.resources_index"
+terraform apply -target="module.resources_index" -auto-approve
 
-terraform plan -target "module.index_data"
-terraform apply -target "module.index_data"
+terraform plan -target "module.data_sources_index"
+terraform apply -target "module.data_sources_index"
 
-terraform plan -target "module.api_key"
-terraform apply -target "module.api_key" -auto-approve
-terraform destroy -target "module.api_key" -auto-approve
-
-
-terraform plan -target "module.call_external_http"
-terraform plan -target "module.call_local_command"
-terraform plan -target "module.call_local_python"
+terraform plan -target "module.resources_api_key"
+terraform apply -target "module.resources_api_key" -auto-approve
+terraform destroy -target "module.resources_api_key" -auto-approve
 
 
-terraform plan -target "module.non_empty_index_no_delete"
-terraform apply -target "module.non_empty_index_no_delete" -auto-approve
+terraform plan -target "module.use_cases_call_external_http"
+terraform plan -target "module.use_cases_call_local_command"
+terraform plan -target "module.use_cases_call_local_python"
+
+terraform plan -target "module.use_cases_non_empty_index_no_delete"
+terraform apply -target "module.use_cases_non_empty_index_no_delete" -auto-approve
 
 ```
 

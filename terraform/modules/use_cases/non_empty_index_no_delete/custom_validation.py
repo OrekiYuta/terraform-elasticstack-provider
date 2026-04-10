@@ -90,7 +90,7 @@ if __name__ == "__main__":
 # │ Error: External Program Execution Failed
 # │
 # │   with module.non_empty_index_no_delete.data.external.custom_validation,
-# │   on modules\special_scenarios_tests\non_empty_index_no_delete\main.tf line 30, in data "external" "custom_validation":
+# │   on modules\use_cases\non_empty_index_no_delete\main.tf line 30, in data "external" "custom_validation":
 # │   30:   program = ["python", "${path.module}/custom_validation.py"]
 # │
 # │ The data source received an unexpected error while attempting to execute the program.

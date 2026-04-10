@@ -9,8 +9,8 @@ terraform {
 
 
 data "elasticstack_elasticsearch_indices" "application_indices" {
-  # target = "application-*"
-  target = "application-metrics-jenkins"
+  target = "application-*"
+  # target = "application-metrics-jenkins"
 }
 
 
@@ -18,12 +18,6 @@ output "application_indices_details" {
   value = [for idx in data.elasticstack_elasticsearch_indices.application_indices.indices : idx.name]
   # value = data.elasticstack_elasticsearch_indices.application_indices.indices
 }
-
-# Changes to Outputs:
-#   + application_indices_details = [
-#       + "application-metrics-jenkins",
-#     ]
-
 
 
 # Changes to Outputs:

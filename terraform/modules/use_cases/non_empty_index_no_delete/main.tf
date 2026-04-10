@@ -21,7 +21,7 @@ variable "es_password" {
 }
 
 locals {
-  config = yamldecode(file("${path.root}/../gitops/special_scenarios_tests/non_empty_index_no_delete/index.yaml"))
+  config = yamldecode(file("${path.root}/../gitops/use_cases/non_empty_index_no_delete/index.yaml"))
   yaml_existing_indices = [for i in lookup(local.config, "indices", []) : i.name]
 }
 
