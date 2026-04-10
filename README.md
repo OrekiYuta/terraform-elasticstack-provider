@@ -98,55 +98,142 @@ terraform apply -target "module.use_cases_non_empty_index_no_delete" -auto-appro
 
 ```tree
 terraform-elasticstack-provider/
-├── .env
-├── .git/
-├── .gitignore
-├── .idea/
 ├── README.md
 ├── requirements.txt
-├── venv/
-├── scripts/
-│   ├── index_docs_manager.py
-│   └── __pycache__/
 ├── gitops/
+│   ├── enrich/
+│   │   ├── data_sources/
+│   │   │   └── enrich_policy.yaml
+│   │   └── resources/
+│   │       └── enrich_policy.yaml
 │   ├── index/
 │   │   ├── data_sources/
+│   │   │   ├── index_template.yaml
+│   │   │   └── index.yaml
 │   │   └── resources/
+│   │       ├── component_template.yaml
+│   │       ├── data_stream.yaml
+│   │       ├── data_stream_lifecycle.yaml
 │   │       ├── index.yaml
-│   │       └── index_template.yaml
-│   ├── security/
+│   │       ├── index_alias.yaml
+│   │       ├── index_lifecycle.yaml
+│   │       ├── index_template.yaml
+│   │       └── index_template_ilm_attachment.yaml
+│   ├── kibana/
+│   │   ├── data_sources/
+│   │   │   ├── export_saved_objects.yaml
+│   │   │   └── space.yaml
 │   │   └── resources/
-│   │       └── api_key.yaml
-│   └── special_scenarios_tests/
+│   │       ├── data_view.yaml
+│   │       ├── import_saved_objects.yaml
+│   │       └── space.yaml
+│   ├── logstash/
+│   │   ├── data_sources/
+│   │   └── resources/
+│   │       └── logstash_pipeline.yaml
+│   ├── security/
+│   │   ├── data_sources/
+│   │   │   ├── role.yaml
+│   │   │   ├── role_mapping.yaml
+│   │   │   └── user.yaml
+│   │   └── resources/
+│   │       ├── api_key.yaml
+│   │       ├── role.yaml
+│   │       ├── role_mapping.yaml
+│   │       └── user.yaml
+│   ├── snapshot/
+│   │   ├── data_sources/
+│   │   │   └── snapshot_repository.yaml
+│   │   └── resources/
+│   │       ├── snapshot_lifecycle.yaml
+│   │       └── snapshot_repository.yaml
+│   └── use_cases/
 │       └── non_empty_index_no_delete/
 │           └── index.yaml
+├── scripts/
+│   └── index_docs_manager.py
 └── terraform/
-    ├── .terraform/
-    ├── .terraform.lock.hcl
     ├── main.tf
     ├── outputs.tf
     ├── providers.tf
-    ├── terraform.tfstate
     ├── terraform.tfvars
     ├── variables.tf
     └── modules/
+        ├── enrich/
+        │   ├── data_sources/
+        │   │   └── enrich_policy/
+        │   │       └── main.tf
+        │   └── resources/
+        │       └── enrich_policy/
+        │           └── main.tf
         ├── index/
         │   ├── data_sources/
         │   │   ├── index/
         │   │   │   └── main.tf
         │   │   └── index_template/
+        │   │       └── main.tf
         │   └── resources/
+        │       ├── component_template/
+        │       │   └── main.tf
+        │       ├── data_stream/
+        │       │   └── main.tf
+        │       ├── data_stream_lifecycle/
+        │       │   └── main.tf
         │       ├── index/
         │       │   └── main.tf
-        │       └── index_template/
+        │       ├── index_alias/
+        │       │   └── main.tf
+        │       ├── index_lifecycle/
+        │       │   └── main.tf
+        │       ├── index_template/
+        │       │   └── main.tf
+        │       └── index_template_ilm_attachment/
+        │           └── main.tf
+        ├── kibana/
+        │   ├── data_sources/
+        │   │   ├── export_saved_objects/
+        │   │   │   └── main.tf
+        │   │   └── space/
+        │   │       └── main.tf
+        │   └── resources/
+        │       ├── data_view/
+        │       │   └── main.tf
+        │       ├── import_saved_objects/
+        │       │   └── main.tf
+        │       └── space/
+        │           └── main.tf
+        ├── logstash/
+        │   └── resources/
+        │       └── logstash_pipeline/
         │           └── main.tf
         ├── security/
         │   ├── data_sources/
+        │   │   ├── role/
+        │   │   │   └── main.tf
+        │   │   ├── role_mapping/
+        │   │   │   └── main.tf
+        │   │   └── user/
+        │   │       └── main.tf
         │   └── resources/
-        │       └── api_key/
-        │           ├── api_keys.json
+        │       ├── api_key/
+        │       │   ├── api_keys.json
+        │       │   └── main.tf
+        │       ├── role/
+        │       │   └── main.tf
+        │       ├── role_mapping/
+        │       │   └── main.tf
+        │       └── user/
         │           └── main.tf
-        └── special_scenarios_tests/
+        ├── snapshot/
+        │   ├── data_sources/
+        │   │   └── snapshot_repository/
+        │   │       └── main.tf
+        │   └── resources/
+        │       ├── snapshot_lifecycle/
+        │       │   └── main.tf
+        │       └── snapshot_repository/
+        │           └── main.tf
+        └── use_cases/
             ├── call_external_http/
             │   └── main.tf
             ├── call_local_command/
@@ -157,4 +244,5 @@ terraform-elasticstack-provider/
             └── non_empty_index_no_delete/
                 ├── custom_validation.py
                 └── main.tf
+
 ```
