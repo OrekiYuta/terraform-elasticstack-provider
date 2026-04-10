@@ -25,10 +25,7 @@ data "elasticstack_elasticsearch_indices" "this" {
 
 
 output "index_info" {
-  value = flatten([
-    for ds in data.elasticstack_elasticsearch_indices.this :
-    [for idx in ds.indices : idx.name]
-  ])
+  value = data.elasticstack_elasticsearch_indices.this
 }
 
 

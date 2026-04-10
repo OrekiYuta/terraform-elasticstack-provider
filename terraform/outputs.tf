@@ -2,6 +2,10 @@ output "data_sources_index_info" {
   value = module.data_sources_index.index_info
 }
 
+output "data_sources_index_template_info" {
+  value = module.data_sources_index_template.index_template_info
+}
+
 output "use_case_call_external_http" {
   value = module.use_cases_call_external_http
 }

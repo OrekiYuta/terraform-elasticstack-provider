@@ -18,6 +18,9 @@ module "data_sources_index" {
   source = "./modules/index/data_sources/index"
 }
 
+module "data_sources_index_template" {
+  source = "./modules/index/data_sources/index_template"
+}
 
 
 # special scenarios for resources
