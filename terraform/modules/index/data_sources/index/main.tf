@@ -8,17 +8,28 @@ terraform {
 }
 
 
-data "elasticstack_elasticsearch_indices" "application_indices" {
-  target = "application-*"
-  # target = "application-metrics-jenkins"
+locals {
+  config = yamldecode(file("${path.root}/../gitops/index/data_sources/index.yaml"))
+  indices = lookup(local.config, "indices", [])
+  indices_map = {
+    for idx in local.indices :
+    idx.name => idx
+  }
+}
+
+
+data "elasticstack_elasticsearch_indices" "this" {
+  for_each = local.indices_map
+  target = each.value.name
 }
 
 
 output "application_indices_details" {
-  value = [for idx in data.elasticstack_elasticsearch_indices.application_indices.indices : idx.name]
-  # value = data.elasticstack_elasticsearch_indices.application_indices.indices
+  value = flatten([
+    for ds in data.elasticstack_elasticsearch_indices.this :
+    [for idx in ds.indices : idx.name]
+  ])
 }
-
 
 # Changes to Outputs:
 #   + application_indices_details = [
