@@ -11,9 +11,9 @@ locals {
   raw_config = file("${path.root}/../gitops/snapshot/resources/snapshot_repository.yaml")
   config     = try(yamldecode(local.raw_config), {})
 
-  repositories = try(local.config["repositories"], [])
+  snapshot_repositories = try(local.config["snapshot_repositories"], [])
   repositories_map = {
-    for item in local.repositories :
+    for item in local.snapshot_repositories :
     lookup(item, "name", "") => item
     if lookup(item, "name", "") != ""
   }

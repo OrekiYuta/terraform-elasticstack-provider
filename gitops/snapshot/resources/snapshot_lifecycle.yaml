@@ -1,4 +1,4 @@
-policies:
+snapshot_lifecycle_policies:
   - name: tf-snapshot-policy
     schedule: 0 30 1 * * ?
     repository: tf-snapshot-repository-new
@@ -11,7 +11,7 @@ policies:
       min_count: 1
       max_count: 10
 
-managed_repositories:
+snapshot_repositories:
   - name: tf-snapshot-repository-new
     verify: false # Testing only
     azure:

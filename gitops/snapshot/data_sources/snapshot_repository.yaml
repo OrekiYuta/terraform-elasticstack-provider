@@ -1,5 +1,5 @@
-#repositories: []
-repositories:
+#snapshot_repositories: []
+snapshot_repositories:
   - name: cloud-snapshot-2026.04.11-rr35hxsjt3y0xvw5bhusla
 
 

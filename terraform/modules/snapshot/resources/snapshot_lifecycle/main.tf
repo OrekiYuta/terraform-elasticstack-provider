@@ -10,23 +10,23 @@ terraform {
 locals {
   raw_config = file("${path.root}/../gitops/snapshot/resources/snapshot_lifecycle.yaml")
   config     = try(yamldecode(local.raw_config), {})
-  managed_repositories = length(try(local.config["managed_repositories"], [])) > 0 ? try(local.config["managed_repositories"], []) : try(local.config["repositories"], [])
-  managed_repositories_map = {
-    for item in local.managed_repositories :
+  snapshot_repositories = try(local.config["snapshot_repositories"], [])
+  snapshot_repositories_map = {
+    for item in local.snapshot_repositories :
     lookup(item, "name", "") => item
     if lookup(item, "name", "") != ""
   }
 
-  policies = try(local.config["policies"], [])
-  policies_map = {
-    for item in local.policies :
+  snapshot_lifecycle_policies = try(local.config["snapshot_lifecycle_policies"], [])
+  snapshot_lifecycle_policies_map = {
+    for item in local.snapshot_lifecycle_policies :
     lookup(item, "name", "") => item
     if lookup(item, "name", "") != ""
   }
 }
 
 resource "elasticstack_elasticsearch_snapshot_repository" "managed" {
-  for_each = local.managed_repositories_map
+  for_each = local.snapshot_repositories_map
 
   name   = lookup(each.value, "name", null)
   verify = lookup(each.value, "verify", null)
@@ -124,7 +124,7 @@ resource "elasticstack_elasticsearch_snapshot_repository" "managed" {
 }
 
 resource "elasticstack_elasticsearch_snapshot_lifecycle" "this" {
-  for_each = local.policies_map
+  for_each = local.snapshot_lifecycle_policies_map
 
   name                 = lookup(each.value, "name", null)
   schedule             = lookup(each.value, "schedule", null)

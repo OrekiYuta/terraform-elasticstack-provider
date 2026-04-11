@@ -1,4 +1,4 @@
-repositories:
+snapshot_repositories:
   - name: tf-snapshot-repository-new
     verify: false # NOTE: This is for testing purpose only, DO NOT set it to True in production environment
     azure:
