@@ -1,0 +1,15 @@
+#exports: []
+exports:
+  - objects:
+      - type: dashboard
+        id: system-d401ef40-a7d5-11e9-a422-d144027429da
+    space_id: default
+    include_references_deep: true
+    exclude_export_details: false
+
+  - objects:
+      - type: index-pattern # this is data view, but index-pattern is the correct type for export
+        id: faf13cec-7b89-4aa5-84da-3c5d7e45003f
+    space_id: default
+    include_references_deep: true
+    exclude_export_details: false

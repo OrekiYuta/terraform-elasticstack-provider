@@ -15,3 +15,16 @@ variable "es_password" {
   type      = string
   sensitive = true
 }
+
+variable "kibana_url" {
+  type = string
+}
+
+variable "kibana_user" {
+  type = string
+}
+
+variable "kibana_password" {
+  type      = string
+  sensitive = true
+}

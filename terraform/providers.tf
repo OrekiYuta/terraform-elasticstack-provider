@@ -14,11 +14,17 @@ terraform {
 #   }
 # }
 
+
 provider "elasticstack" {
   elasticsearch {
     endpoints = [var.es_url]
+    username  = var.es_user
+    password  = var.es_password
+  }
 
-    username = var.es_user
-    password = var.es_password
+  kibana {
+    endpoints = [var.kibana_url]
+    username  = var.kibana_user
+    password  = var.kibana_password
   }
 }
