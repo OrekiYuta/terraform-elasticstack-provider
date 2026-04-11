@@ -1,0 +1,8 @@
+role_mappings:
+  - name: tf-role-mapping
+    enabled: true
+    roles:
+      - tf-security-role
+    rules:
+      field:
+        username: "*"
