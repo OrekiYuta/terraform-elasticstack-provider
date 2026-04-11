@@ -1,0 +1,9 @@
+users:
+  - username: tf_user_1
+    password: change_me_please
+    roles:
+      - tf-security-role
+    full_name: Terraform User
+    email: tf_user_1@example.com
+    enabled: true
+
