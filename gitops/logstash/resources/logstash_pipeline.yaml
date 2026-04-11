@@ -1,0 +1,91 @@
+pipelines:
+  - pipeline_id: tf-logstash-pipeline-1
+    description: Managed by Terraform
+    pipeline: |
+      input {
+        elasticsearch {
+          hosts => "${ELASTICSEARCH_HOST}"
+          user => "${ELASTICSEARCH_USER}"
+          password => "${ELASTICSEARCH_PASSWORD}"
+          index => "metricops_mos-deployer_mo-blf_d0_logstash-pipeline-event-queue"
+          query => '{
+            "query": {
+              "bool": {
+                "must": [
+                  { "term": { "event_status": "PENDING" } }
+                ]
+              }
+            },
+            "_source": true
+          }'
+          schedule => "*/1 * * * *"
+          docinfo => true
+          docinfo_target => "@metadata"
+        }
+      }
+      
+      filter {
+        ruby {
+          code => '
+            require "net/http"
+            require "uri"
+            require "json"
+      
+            # Function to make HTTP requests
+            def make_request(endpoint, method, body=nil)
+              host = "${ELASTICSEARCH_HOST}"
+              username = "${ELASTICSEARCH_USER}"
+              password = "${ELASTICSEARCH_PASSWORD}"
+      
+              url = URI.join(host, endpoint)
+              request = method == "post" ? Net::HTTP::Post.new(url) : Net::HTTP::Get.new(url)
+              request.content_type = "application/json"
+              request.body = body.to_json if body
+              request.basic_auth(username, password)
+      
+              response = Net::HTTP.start(url.hostname, url.port, use_ssl: url.scheme == "https") do |http|
+                http.request(request)
+              end
+              response.body
+            end
+      
+            doc_event_type = event.get("event_type")
+            doc_event_status = event.get("event_status")
+            doc_payload = event.get("payload")
+            event_id = event.get("[@metadata][_id]")
+      
+            logger.info("Receive EventId: #{event_id}, EventType: #{doc_event_type}, EventStatus: #{doc_event_status}, Payload: #{doc_payload}")
+          
+      
+            update_query = {
+              "script": {
+                "source": "ctx._source.event_status = \"PROCESSING\"",
+                "lang": "painless"
+              },
+              "query": {
+                "term": {
+                  "_id": event_id
+                }
+              }
+            }      
+      
+            update_response = make_request("/metricops_mos-deployer_mo-blf_d0_logstash-pipeline-event-queue/_update_by_query", "post", update_query)
+            update_results = JSON.parse(update_response)
+      
+            if update_results["updated"] > 0
+              logger.info("Processing EventId: #{event_id}, Response: #{update_response}")
+            else
+              logger.warn("Document missing for event: #{event_id}, Response: #{update_response}")
+            end
+          '
+        }
+      }
+      
+      output {
+        if [event_type] == "SHORTNAME_UPDATE" {
+          pipeline { send_to => "metricops_mos-deployer_mo-blf_d0_shortname-update-processor" }
+        }
+      
+        stdout { codec => rubydebug }
+      }
+
