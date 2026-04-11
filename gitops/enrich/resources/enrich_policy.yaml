@@ -1,0 +1,25 @@
+enrich_policies:
+  - name: tf-enrich-policy
+    policy_type: match
+    indices:
+      - tf-index
+    match_field: email
+    enrich_fields:
+      - first_name
+      - last_name
+      - team
+
+managed_indices:
+  - name: tf-index
+    number_of_shards: 1
+    number_of_replicas: 0
+    mappings:
+      properties:
+        email:
+          type: text
+        first_name:
+          type: text
+        last_name:
+          type: text
+        team:
+          type: text

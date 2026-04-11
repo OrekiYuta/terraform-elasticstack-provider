@@ -72,9 +72,9 @@ terraform apply -target="module.resources_snapshot_repository" -auto-approve
 ### Data Sources - Command
 
 ```shell
+terraform plan -target "module.data_sources_enrich_policy"
 terraform plan -target "module.data_sources_index"
 terraform plan -target "module.data_sources_index_template"
-terraform plan -target "module.data_sources_enrich_policy"
 terraform plan -target "module.data_sources_space"
 terraform plan -target "module.data_sources_export_saved_objects"
 terraform plan -target "module.data_sources_role"

@@ -1,6 +1,6 @@
 # Data Sources
 output "data_sources_enrich_policy" {
-  value = module.data_sources_enrich_policy
+  value = module.data_sources_enrich_policy.enrich_policy_info
 }
 
 output "data_sources_index_info" {

@@ -1,0 +1,2 @@
+enrich_policies:
+  - name: demo_policy
