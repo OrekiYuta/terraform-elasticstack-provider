@@ -1,0 +1,3 @@
+spaces:
+  - name: all_spaces
+# terraform provider default list all spaces, not support any filter
