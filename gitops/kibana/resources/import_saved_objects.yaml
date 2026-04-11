@@ -1,0 +1,7 @@
+imports: []
+# imports:
+#   - file_path: gitops/kibana/resources/saved_objects.ndjson
+#     space_id: default
+#     overwrite: true
+#     ignore_import_errors: false
+
