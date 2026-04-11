@@ -1,0 +1,22 @@
+policies:
+  - name: tf-snapshot-policy
+    schedule: 0 30 1 * * ?
+    repository: tf-snapshot-repository-new
+    config:
+      indices:
+        - "*"
+      include_global_state: false
+    retention:
+      expire_after: 30d
+      min_count: 1
+      max_count: 10
+
+managed_repositories:
+  - name: tf-snapshot-repository-new
+    verify: false # Testing only
+    azure:
+      container: c5e0b74fcb08d44a1bb555baaf15523
+      client: elastic-internal-83e5f1
+      base_path: snapshots/tf-snapshot-repository-new
+      compress: true
+
