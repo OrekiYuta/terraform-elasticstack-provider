@@ -12,42 +12,55 @@ terraform apply
 ```shell
 terraform plan -target "module.resources_enrich_policy"
 terraform apply -target="module.resources_enrich_policy" -auto-approve
+terraform destroy -target="module.resources_enrich_policy" -auto-approve
 
 terraform plan -target "module.resources_index"
 terraform apply -target="module.resources_index" -auto-approve
+terraform destroy -target="module.resources_index" -auto-approve
 
 terraform plan -target "module.resources_index_template"
 terraform apply -target="module.resources_index_template" -auto-approve
+terraform destroy -target="module.resources_index_template" -auto-approve
 
 terraform plan -target "module.resources_component_template"
 terraform apply -target="module.resources_component_template" -auto-approve
+terraform destroy -target="module.resources_component_template" -auto-approve
 
 terraform plan -target "module.resources_data_stream"
 terraform apply -target="module.resources_data_stream" -auto-approve
+terraform destroy -target="module.resources_data_stream" -auto-approve
 
 terraform plan -target "module.resources_data_stream_lifecycle"
 terraform apply -target="module.resources_data_stream_lifecycle" -auto-approve
+terraform destroy -target="module.resources_data_stream_lifecycle" -auto-approve
 
 terraform plan -target "module.resources_index_alias"
 terraform apply -target="module.resources_index_alias" -auto-approve
+terraform destroy -target="module.resources_index_alias" -auto-approve
 
 terraform plan -target "module.resources_index_lifecycle"
 terraform apply -target="module.resources_index_lifecycle" -auto-approve
+terraform destroy -target="module.resources_index_lifecycle" -auto-approve
 
 terraform plan -target "module.resources_index_template_ilm_attachment"
 terraform apply -target="module.resources_index_template_ilm_attachment" -auto-approve
+terraform destroy -target="module.resources_index_template_ilm_attachment" -auto-approve
 
 terraform plan -target "module.resources_data_view"
 terraform apply -target="module.resources_data_view" -auto-approve
+terraform destroy -target="module.resources_data_view" -auto-approve
 
 terraform plan -target "module.resources_import_saved_objects"
 terraform apply -target="module.resources_import_saved_objects" -auto-approve
+terraform destroy -target="module.resources_import_saved_objects" -auto-approve
 
 terraform plan -target "module.resources_space"
 terraform apply -target="module.resources_space" -auto-approve
+terraform destroy -target="module.resources_space" -auto-approve
 
 terraform plan -target "module.resources_logstash_pipeline"
 terraform apply -target="module.resources_logstash_pipeline" -auto-approve
+terraform destroy -target="module.resources_logstash_pipeline" -auto-approve
 
 terraform plan -target "module.resources_api_key"
 terraform apply -target "module.resources_api_key" -auto-approve
@@ -55,18 +68,23 @@ terraform destroy -target "module.resources_api_key" -auto-approve
 
 terraform plan -target "module.resources_role"
 terraform apply -target="module.resources_role" -auto-approve
+terraform destroy -target="module.resources_role" -auto-approve
 
 terraform plan -target "module.resources_role_mapping"
 terraform apply -target="module.resources_role_mapping" -auto-approve
+terraform destroy -target="module.resources_role_mapping" -auto-approve
 
 terraform plan -target "module.resources_user"
 terraform apply -target="module.resources_user" -auto-approve
+terraform destroy -target="module.resources_user" -auto-approve
 
 terraform plan -target "module.resources_snapshot_lifecycle"
 terraform apply -target="module.resources_snapshot_lifecycle" -auto-approve
+terraform destroy -target="module.resources_snapshot_lifecycle" -auto-approve
 
 terraform plan -target "module.resources_snapshot_repository"
 terraform apply -target="module.resources_snapshot_repository" -auto-approve
+terraform destroy -target="module.resources_snapshot_repository" -auto-approve
 ```
 
 ### Data Sources - Command
