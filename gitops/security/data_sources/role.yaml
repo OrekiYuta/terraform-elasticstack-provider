@@ -1,4 +1,4 @@
 #roles: []
- roles:
-   - name: superuser
-   - name: editor
+roles:
+  - name: superuser
+  - name: editor

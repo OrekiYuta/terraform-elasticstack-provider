@@ -1,6 +1,6 @@
 #users: []
- users:
-   - username: metricops
-   - username: admin
+users:
+  - username: metricops
+  - username: admin
 
 
