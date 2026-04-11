@@ -1,0 +1,8 @@
+repositories:
+  - name: tf-snapshot-repository-new
+    verify: false # NOTE: This is for testing purpose only, DO NOT set it to True in production environment
+    azure:
+      container: c5e0b74fcb08d44a1bb555baaf15523
+      client: elastic-internal-83e5f1
+      base_path: snapshots/tf-snapshot-repository-new
+      compress: true
