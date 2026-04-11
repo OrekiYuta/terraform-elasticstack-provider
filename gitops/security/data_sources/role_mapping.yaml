@@ -1,0 +1,4 @@
+#role_mappings: []
+role_mappings:
+  - name: oidc_test
+  - name: metricops_app-log-monitor_default_d0_developer
