@@ -1,0 +1,24 @@
+index_template_ilm_attachments:
+  - lifecycle_name: tf_index_lifecycle
+    index_template: tf_external_template_for_attachment
+
+managed_index_lifecycles:
+  - name: tf_index_lifecycle
+    hot:
+      set_priority:
+        priority: 100
+    delete:
+      min_age: 30d
+      delete:
+        delete_searchable_snapshot: true
+
+managed_index_templates:
+  - name: tf_external_template_for_attachment
+    index_patterns:
+      - "tf_external_*"
+
+# Note:
+# `terraform apply` auto-creates `<index_template>@custom`.
+# `terraform destroy` may not remove it automatically.
+# Delete the remaining `@custom` component template manually in Kibana UI if needed.
+
