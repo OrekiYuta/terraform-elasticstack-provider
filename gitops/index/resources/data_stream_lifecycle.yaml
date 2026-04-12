@@ -1,0 +1,15 @@
+#data_stream_lifecycles: []
+data_stream_lifecycles:
+  - name: tf_logs_data_stream
+    enabled: true
+    data_retention: 30d
+    expand_wildcards: all
+
+managed_data_streams:
+  - name: tf_logs_data_stream
+
+managed_index_templates:
+  - name: tf_logs_data_stream_template
+    index_patterns:
+      - "tf_logs_*"
+
