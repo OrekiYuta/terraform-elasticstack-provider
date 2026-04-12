@@ -1,0 +1,8 @@
+#data_streams: []
+data_streams:
+  - name: tf_logs_data_stream
+
+managed_index_templates:
+  - name: tf_logs_data_stream_template
+    index_patterns:
+      - "tf_logs_*"
