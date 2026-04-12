@@ -1,0 +1,11 @@
+#index_lifecycles: []
+index_lifecycles:
+  - name: tf_index_lifecycle
+    hot:
+      min_age: 0ms
+      set_priority:
+        priority: 100
+    delete:
+      min_age: 30d
+      delete:
+        delete_searchable_snapshot: true
