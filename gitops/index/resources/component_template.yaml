@@ -1,0 +1,16 @@
+#component_templates: []
+component_templates:
+  - name: tf_component_template
+    version: 1
+    metadata:
+      owner: platform
+    template:
+      settings:
+        number_of_shards: 1
+      mappings:
+        properties:
+          env:
+            type: keyword
+      aliases:
+        - name: tf_component_alias
+
