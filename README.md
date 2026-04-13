@@ -108,8 +108,12 @@ terraform plan -target "module.use_cases_call_external_http"
 terraform plan -target "module.use_cases_call_local_command"
 terraform plan -target "module.use_cases_call_local_python"
 
-terraform plan -target "module.use_cases_non_empty_index_no_delete"
-terraform apply -target "module.use_cases_non_empty_index_no_delete" -auto-approve
+terraform plan -target "module.use_cases_http_non_empty_index_no_delete"
+terraform apply -target "module.use_cases_http_non_empty_index_no_delete" -auto-approve
+
+terraform plan -target "module.use_cases_python_non_empty_index_no_delete"
+terraform apply -target "module.use_cases_python_non_empty_index_no_delete" -auto-approve
+
 ```
 
 ### Project Tree

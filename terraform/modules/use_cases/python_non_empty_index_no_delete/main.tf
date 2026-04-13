@@ -21,7 +21,7 @@ variable "es_password" {
 }
 
 locals {
-  config = yamldecode(file("${path.root}/../gitops/use_cases/non_empty_index_no_delete/index.yaml"))
+  config = yamldecode(file("${path.root}/../gitops/use_cases/python_non_empty_index_no_delete/index.yaml"))
   yaml_existing_indices = [for i in lookup(local.config, "indices", []) : i.name]
 }
 
@@ -31,7 +31,7 @@ data "external" "custom_validation" {
 
   query = {
     yaml_existing_indices = jsonencode(local.yaml_existing_indices)
-    prefix      = "nte--app1--d0--"
+    prefix      = "python--nte--app1--d0--"
     es_url      = var.es_url
     es_user     = var.es_user
     es_password = var.es_password
@@ -42,6 +42,6 @@ data "external" "custom_validation" {
 resource "elasticstack_elasticsearch_index" "this" {
   for_each = { for idx in local.yaml_existing_indices : idx => idx }
   name               = each.value
-
+  deletion_protection = false
   depends_on = [data.external.custom_validation]
 }

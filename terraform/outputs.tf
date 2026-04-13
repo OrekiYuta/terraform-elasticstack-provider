@@ -49,6 +49,11 @@ output "use_case_call_local_python" {
   value = module.use_cases_call_local_python
 }
 
-output "use_cases_non_empty_index_no_delete" {
-  value = module.use_cases_non_empty_index_no_delete
+# output "use_cases_python_non_empty_index_no_delete" {
+#   value = module.use_cases_python_non_empty_index_no_delete
+# }
+
+output "use_cases_http_non_empty_index_no_delete" {
+  value = module.use_cases_http_non_empty_index_no_delete
 }
+

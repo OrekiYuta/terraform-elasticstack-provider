@@ -23,8 +23,8 @@ def insert_document(index_name: str):
     }
 
     response = requests.post(url, headers=headers, data=json.dumps(doc))
-    print("Insert Status Code:", response.status_code)
-    print("Insert Response:", response.text)
+    print(f"[{index_name}] Insert Status Code:", response.status_code)
+    print(f"[{index_name}] Insert Response:", response.text)
 
 
 def delete_all_documents(index_name: str):
@@ -36,14 +36,21 @@ def delete_all_documents(index_name: str):
 
     payload = {"query": {"match_all": {}}}
     response = requests.post(url, headers=headers, data=json.dumps(payload))
-    print("Delete Status Code:", response.status_code)
-    print("Delete Response:", response.text)
+    print(f"[{index_name}] Delete Status Code:", response.status_code)
+    print(f"[{index_name}] Delete Response:", response.text)
 
 
 if __name__ == "__main__":
-    # index_name = "nte--app1--d0--tf_index1_with_document"
-    # index_name = "nte--app1--d0--tf_index3_with_document"
-    index_name = "nte--app1--d0--tf_index4_with_document"
+    index_list = [
+        "python--nte--app1--d0--tf_index1_with_document",
+        "python--nte--app1--d0--tf_index3_with_document",
+        "python--nte--app1--d0--tf_index4_with_document",
 
-    insert_document(index_name)
-    # delete_all_documents(index_name)
+        "http--nte--app1--d0--tf_index1_with_document",
+        "http--nte--app1--d0--tf_index3_with_document",
+        "http--nte--app1--d0--tf_index4_with_document"
+    ]
+
+    for index_name in index_list:
+        insert_document(index_name)
+        # delete_all_documents(index_name)

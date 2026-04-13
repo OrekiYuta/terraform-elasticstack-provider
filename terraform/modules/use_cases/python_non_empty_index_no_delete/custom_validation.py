@@ -68,14 +68,14 @@ if __name__ == "__main__":
     main()
 
 
-# $ (venv) terraform plan -target "module.non_empty_index_no_delete"
-# module.non_empty_index_no_delete.data.external.custom_validation: Reading...
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m10s elapsed]
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m20s elapsed]
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m30s elapsed]
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m40s elapsed]
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m50s elapsed]
-# module.non_empty_index_no_delete.data.external.custom_validation: Still reading... [01m00s elapsed]
+# $ (venv) terraform plan -target "module.python_non_empty_index_no_delete"
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Reading...
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m10s elapsed]
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m20s elapsed]
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m30s elapsed]
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m40s elapsed]
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m50s elapsed]
+# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [01m00s elapsed]
 #
 # Planning failed. Terraform encountered an error while generating this plan.
 #
@@ -89,13 +89,13 @@ if __name__ == "__main__":
 # ╷
 # │ Error: External Program Execution Failed
 # │
-# │   with module.non_empty_index_no_delete.data.external.custom_validation,
-# │   on modules\use_cases\non_empty_index_no_delete\main.tf line 30, in data "external" "custom_validation":
+# │   with module.python_non_empty_index_no_delete.data.external.custom_validation,
+# │   on modules\use_cases\python_non_empty_index_no_delete\main.tf line 30, in data "external" "custom_validation":
 # │   30:   program = ["python", "${path.module}/custom_validation.py"]
 # │
 # │ The data source received an unexpected error while attempting to execute the program.
 # │
-# │ Program: F:\Code\1.MyGitHub\terraform-elasticstack-provider\venv\Scripts\python.exe
+# │ Program: ...\terraform-elasticstack-provider\venv\Scripts\python.exe
 # │ Error Message:
 # │ INFO: Received query: keys=['es_password', 'es_url', 'es_user', 'prefix', 'yaml_existing_indices']
 # │ INFO: Existing indices in Elasticsearch: {'nte--app1--d0--tf_index4_with_document', 'nte--app1--d0--tf_index3_with_document', 'nte--app1--d0--tf_index1_with_document', 'nte--app1--d0--tf_index2_no_document'}
