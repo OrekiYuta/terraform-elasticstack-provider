@@ -112,3 +112,35 @@ output "http_non_empty_index_no_delete" {
   }
 }
 
+# (.venv) elias@dhcp-9-112-32-238 terraform % terraform plan -target "module.use_cases_http_non_empty_index_no_delete"
+# module.use_cases_http_non_empty_index_no_delete.data.http.existing_indices: Reading...
+# module.use_cases_http_non_empty_index_no_delete.data.http.existing_indices: Read complete after 0s [id=https://mops1-ct3.es.southeastasia.azure.elastic-cloud.com:443/_cat/indices/http--nte--app1--d0--*?h=index&format=json]
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index4_with_document"]: Reading...
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index3_with_document"]: Reading...
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index2_no_document"]: Reading...
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index3_with_document"]: Read complete after 1s [id=https://mops1-ct3.es.southeastasia.azure.elastic-cloud.com:443/http--nte--app1--d0--tf_index3_with_document/_count]
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index4_with_document"]: Read complete after 1s [id=https://mops1-ct3.es.southeastasia.azure.elastic-cloud.com:443/http--nte--app1--d0--tf_index4_with_document/_count]
+# module.use_cases_http_non_empty_index_no_delete.data.http.index_count["http--nte--app1--d0--tf_index2_no_document"]: Read complete after 1s [id=https://mops1-ct3.es.southeastasia.azure.elastic-cloud.com:443/http--nte--app1--d0--tf_index2_no_document/_count]
+# module.use_cases_http_non_empty_index_no_delete.terraform_data.validation_gate: Refreshing state... [id=bc7ed993-27cc-f064-b5e2-9d15ca98c105]
+#
+# Planning failed. Terraform encountered an error while generating this plan.
+#
+# ╷
+# │ Warning: Resource targeting is in effect
+# │
+# │ You are creating a plan with the -target option, which means that the result of this plan may not represent all of the changes requested by the current
+# │ configuration.
+# │
+# │ The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform
+# │ specifically suggests to use it as part of an error message.
+# ╵
+# ╷
+# │ Error: Resource precondition failed
+# │
+# │   on modules/use_cases/http_non_empty_index_no_delete/main.tf line 92, in resource "terraform_data" "validation_gate":
+# │   92:       condition     = length(local.non_empty_indices) == 0
+# │     ├────────────────
+# │     │ local.non_empty_indices is tuple with 2 elements
+# │
+# │ Cannot continue. Non-empty indices would be deleted: http--nte--app1--d0--tf_index3_with_document(1 docs), http--nte--app1--d0--tf_index4_with_document(1
+# │ docs).

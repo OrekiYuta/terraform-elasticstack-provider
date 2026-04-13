@@ -68,39 +68,36 @@ if __name__ == "__main__":
     main()
 
 
-# $ (venv) terraform plan -target "module.python_non_empty_index_no_delete"
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Reading...
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m10s elapsed]
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m20s elapsed]
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m30s elapsed]
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m40s elapsed]
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [00m50s elapsed]
-# module.python_non_empty_index_no_delete.data.external.custom_validation: Still reading... [01m00s elapsed]
+# (.venv) elias@dhcp-9-112-32-238 terraform % terraform plan -target "module.use_cases_python_non_empty_index_no_delete"
+# module.use_cases_python_non_empty_index_no_delete.data.external.custom_validation: Reading...
 #
 # Planning failed. Terraform encountered an error while generating this plan.
 #
 # ╷
 # │ Warning: Resource targeting is in effect
 # │
-# │ You are creating a plan with the -target option, which means that the result of this plan may not represent all of the changes requested by the current configuration.
+# │ You are creating a plan with the -target option, which means that the result of this plan may not represent all of the changes requested by the current
+# │ configuration.
 # │
-# │ The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform specifically suggests to use it as part of an error message.
+# │ The -target option is not for routine use, and is provided only for exceptional situations such as recovering from errors or mistakes, or when Terraform
+# │ specifically suggests to use it as part of an error message.
 # ╵
 # ╷
 # │ Error: External Program Execution Failed
 # │
-# │   with module.python_non_empty_index_no_delete.data.external.custom_validation,
-# │   on modules\use_cases\python_non_empty_index_no_delete\main.tf line 30, in data "external" "custom_validation":
+# │   with module.use_cases_python_non_empty_index_no_delete.data.external.custom_validation,
+# │   on modules/use_cases/python_non_empty_index_no_delete/main.tf line 30, in data "external" "custom_validation":
 # │   30:   program = ["python", "${path.module}/custom_validation.py"]
 # │
 # │ The data source received an unexpected error while attempting to execute the program.
 # │
-# │ Program: ...\terraform-elasticstack-provider\venv\Scripts\python.exe
+# │ Program: /Users/elias/EliasLi/03.code-github/terraform-elasticstack-provider/.venv/bin/python
 # │ Error Message:
 # │ INFO: Received query: keys=['es_password', 'es_url', 'es_user', 'prefix', 'yaml_existing_indices']
-# │ INFO: Existing indices in Elasticsearch: {'nte--app1--d0--tf_index4_with_document', 'nte--app1--d0--tf_index3_with_document', 'nte--app1--d0--tf_index1_with_document', 'nte--app1--d0--tf_index2_no_document'}
-# │ INFO: Indices to be deleted: {'nte--app1--d0--tf_index4_with_document', 'nte--app1--d0--tf_index3_with_document', 'nte--app1--d0--tf_index2_no_document'}
-# │ ERROR: Cannot delete non-empty indices: nte--app1--d0--tf_index4_with_document(1 docs), nte--app1--d0--tf_index3_with_document(1 docs)
+# │ INFO: Existing indices in Elasticsearch: {'python--nte--app1--d0--tf_index2_no_document', 'python--nte--app1--d0--tf_index4_with_document',
+# │ 'python--nte--app1--d0--tf_index1_with_document', 'python--nte--app1--d0--tf_index3_with_document'}
+# │ INFO: Indices to be deleted: {'python--nte--app1--d0--tf_index2_no_document', 'python--nte--app1--d0--tf_index4_with_document',
+# │ 'python--nte--app1--d0--tf_index3_with_document'}
+# │ ERROR: Cannot delete non-empty indices: python--nte--app1--d0--tf_index4_with_document(1 docs), python--nte--app1--d0--tf_index3_with_document(1 docs)
 # │
 # │ State: exit status 1
-# ╵
