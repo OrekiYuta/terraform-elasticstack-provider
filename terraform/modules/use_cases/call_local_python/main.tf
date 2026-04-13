@@ -16,7 +16,7 @@ variable "payload" {
 }
 
 # ensure python is installed and available in PATH, and the call_http.py script is present in the same directory as this main.tf
-data "external" "call_http" {
+data "external" "call_python" {
   program = [
     "python",
     "${path.module}/call_http.py"
@@ -29,6 +29,6 @@ data "external" "call_http" {
 }
 
 output "python_resp" {
-  value = data.external.call_http.result
+  value = data.external.call_python.result
 }
 
