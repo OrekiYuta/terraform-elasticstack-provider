@@ -39,7 +39,9 @@ locals {
   }
 }
 
+# Validation Step1:
 # Query all existing indices with the target prefix from Elasticsearch.
+# Compare with YAML-defined indices to determine which indices would be implicitly deleted if we proceed (present in ES, absent from YAML).
 data "http" "existing_indices" {
   url             = "${trimsuffix(var.es_url, "/")}/_cat/indices/${var.prefix}*?h=index&format=json"
   request_headers = local.request_headers
@@ -54,6 +56,7 @@ locals {
   indices_to_delete = setsubtract(toset(local.es_existing_indices), toset(local.yaml_existing_indices))
 }
 
+# Validation Step2:
 # Query document count for each index Terraform would implicitly delete (present in ES, absent from YAML).
 data "http" "index_count" {
   for_each = local.indices_to_delete
@@ -76,6 +79,8 @@ locals {
   ]
 }
 
+# Validation Step3:
+# If any index to be deleted has document count > 0, fail the plan/apply with an error message listing the non-empty indices and their document counts.
 resource "terraform_data" "validation_gate" {
   lifecycle {
     precondition {
